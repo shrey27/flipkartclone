@@ -3,7 +3,7 @@ import '../App.css';
 function Filters(props) {
   
   const sizeUpdate = (e) => {
-    props.setSize(e.target.value);
+    props.size ? props.setSize('') : props.setSize(e.target.value);
   }
 
   const brandUpdate = (e) => {
@@ -19,20 +19,20 @@ function Filters(props) {
     }
 
     const idealForUpdate = (e) => {
-        props.setIdealfor(e.target.value);
+        props.idealfor ? props.setIdealfor('') : props.setIdealfor(e.target.value);
     }
 
     const clearArray = () => {
         props.setBrand([]);
-        props.setIdealfor(null);
-        props.setSize(null);
+        props.setIdealfor('');
+        props.setSize('');
         document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
     }
 
   return (
     <div className="filters">
-        <button onClick={()=>props.setDec(true)}>Sort: Low-to-high</button>
-        <button onClick={()=>props.setDec(false)}>Sort: High-to-low</button>
+        <button onClick={()=>props.setDec(false)}>Sort: Low-to-high</button>
+        <button onClick={()=>props.setDec(true)}>Sort: High-to-low</button>
         <div className="filters-name">
             <h4>Filters</h4>
             <h6 onClick={clearArray}>Clear</h6>
