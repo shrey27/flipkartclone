@@ -3,7 +3,7 @@ import '../App.css';
 function Filters(props) {
   
   const sizeUpdate = (e) => {
-    props.size ? props.setSize('') : props.setSize(e.target.value);
+    props.setSize(e.target.value);
   }
 
   const brandUpdate = (e) => {
@@ -19,11 +19,24 @@ function Filters(props) {
     }
 
     const idealForUpdate = (e) => {
-        props.idealfor ? props.setIdealfor('') : props.setIdealfor(e.target.value);
+        props.setIdealfor(e.target.value);
+    }
+
+    const priceUpdate = (e) => {
+        if(!props.price.includes(e.target.value))
+        {
+        props.price.push(e.target.value);
+        props.setPrice([...props.price]);
+        }
+        else{
+            const arr = props.price.filter((value) => value !== e.target.value);
+            props.setPrice([...arr]);        
+        }
     }
 
     const clearArray = () => {
         props.setBrand([]);
+        props.setPrice([]);
         props.setIdealfor('');
         props.setSize('');
         document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
@@ -92,6 +105,33 @@ function Filters(props) {
                 onClick={idealForUpdate}>Kids</button>
             </section> 
         </div>
+
+        <div className="filters-brand">
+            <h4>Price</h4>
+            <section className="filters-section">
+                <div className="filters-section-price">
+                    <input type='checkbox' value='2300' 
+                    onClick={priceUpdate}/>
+                    <label>2300</label>
+                </div>
+                <div className="filters-section-price">
+                    <input type='checkbox' value='200'
+                    onClick={priceUpdate}/>
+                    <label>200</label>
+                </div>
+                <div className="filters-section-price">
+                    <input type='checkbox' value='300'
+                    onClick={priceUpdate}/>
+                    <label>300</label>
+                </div>
+                <div className="filters-section-price">
+                    <input type='checkbox' value='1000'
+                    onClick={priceUpdate}/>
+                    <label>1000</label>
+                </div>
+            </section> 
+        </div>
+
     </div>
   );
 }
