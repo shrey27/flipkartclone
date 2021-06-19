@@ -9,6 +9,7 @@ function Item(props) {
                 <p>{props.name}</p>
                 <p>{props.size}</p>
                 <p>{props.for}</p>
+                <p>{props.price}</p>
             </section>
     </div>
   );

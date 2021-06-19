@@ -1,17 +1,9 @@
 import '../App.css';
 
 function Filters(props) {
-
+  
   const sizeUpdate = (e) => {
-      if(!props.size.includes(e.target.value))
-      {
-        props.size.push(e.target.value);
-        props.setSize([...props.size]);
-      }
-      else{
-            const arr = props.size.filter((value) => value !== e.target.value);
-            props.setSize([...arr]);        
-      }
+    props.setSize(e.target.value);
   }
 
   const brandUpdate = (e) => {
@@ -27,55 +19,38 @@ function Filters(props) {
     }
 
     const idealForUpdate = (e) => {
-        if(!props.idealfor.includes(e.target.value))
-        {
-        props.idealfor.push(e.target.value);
-        props.setIdealfor([...props.idealfor]);
-        }
-        else{
-            const arr = props.idealfor.filter((value) => value !== e.target.value);
-            props.setIdealfor([...arr]);        
-        }
+        props.setIdealfor(e.target.value);
     }
 
     const clearArray = () => {
         props.setBrand([]);
-        props.setIdealfor([]);
-        props.setSize([]);
+        props.setIdealfor(null);
+        props.setSize(null);
         document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
     }
 
   return (
     <div className="filters">
+        <button onClick={()=>props.setDec(true)}>Sort: Low-to-high</button>
+        <button onClick={()=>props.setDec(false)}>Sort: High-to-low</button>
         <div className="filters-name">
             <h4>Filters</h4>
             <h6 onClick={clearArray}>Clear</h6>
         </div>
 
-        <div className='filters-values'>
-        {
-            props.size.map((value) => <p>{value}</p>)
-        }
-        </div>
-        <div className='filters-values'>
-        {
-            props.brand.map((value) => <p>{value}</p>)
-        }
-        </div>
-        <div className='filters-values'>
-        {
-            props.idealfor.map((value) => <p>{value}</p>)
-        }
+        <div className='filter-info'>
+            <p>{props.size}</p>
+            <p>{props.idealfor}</p>    
         </div>
 
         <div className="filters-size">
             <h4>Size</h4>
             <section className="filters-section-size">
-                <button value='S'  className="filters-button"
+                <button value='S'  className='filters-button'
                 onClick={sizeUpdate}>S</button>
-                <button value='M'  className="filters-button"
+                <button value='M'  className='filters-button'
                 onClick={sizeUpdate}>M</button>
-                <button value='L'  className="filters-button"
+                <button value='L'  className='filters-button'
                 onClick={sizeUpdate}>L</button>
             </section>      
         </div>
@@ -109,21 +84,12 @@ function Filters(props) {
         <div className="filters-ideal-for">
             <h4>Ideal For</h4>
             <section className="filters-section">
-                <div className="filters-section-ideal-for">
-                    <input type='checkbox' value='Men'
-                    onClick={idealForUpdate}/>
-                    <label>Men</label>
-                </div>
-                <div className="filters-section-ideal-for">
-                    <input type='checkbox' value='Women' 
-                    onClick={idealForUpdate}/>
-                    <label>Women</label>
-                </div>
-                <div className="filters-section-ideal-for">
-                    <input type='checkbox' value='Kids'
-                    onClick={idealForUpdate}/>
-                    <label>Kids</label>
-                </div>
+                <button value='Men'  className="filters-button"
+                onClick={idealForUpdate}>Men</button>
+                <button value='Women'  className="filters-button"
+                onClick={idealForUpdate}>Women</button>
+                <button value='Kids'  className="filters-button"
+                onClick={idealForUpdate}>Kids</button>
             </section> 
         </div>
     </div>
